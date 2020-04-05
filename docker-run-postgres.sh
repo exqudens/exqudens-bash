@@ -1,6 +1,7 @@
 #!/bin/bash
 
-docker run --rm \
+docker run \
+--rm \
 --name postgres \
 --publish=5432:5432 \
 --env=POSTGRES_HOST_AUTH_METHOD=trust \

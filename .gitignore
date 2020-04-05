@@ -1,0 +1,9 @@
+# Directories
+.idea/
+
+# Files
+*.iml
+*.iws
+*.ipr
+*.ids
+.project
