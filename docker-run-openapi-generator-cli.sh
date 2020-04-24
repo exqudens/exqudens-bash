@@ -7,4 +7,6 @@ docker run \
 --rm \
 --name 'openapi-generator-cli' \
 --volume "${PWD}:/local" \
-'openapitools/openapi-generator-cli' 'generate' "${@}"
+'openapitools/openapi-generator-cli' 'generate' "${@}" && \
+sudo chown -hR andrew:andrew ./out/ && \
+exit 0
