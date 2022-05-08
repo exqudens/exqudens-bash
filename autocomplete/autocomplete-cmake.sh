@@ -6,7 +6,7 @@ _cmake() {
   local cmd="${1##*/}"
   local word="${COMP_WORDS[COMP_CWORD]}"
   local line="${COMP_LINE}"
-  local all='-S . --build --list-presets --preset'
+  local all='-P -S . --build --list-presets --preset'
 
   if echo "${line}" | awk '!/--build --preset .+ --target .+ /{exit 1}'
   then
@@ -51,8 +51,11 @@ _cmake() {
   elif [[ "${line}" == *"-S"* ]]
   then
     all=". $(ls -d */ | cut -f1 -d'/')"
+  elif [[ "${line}" == *"-P"* ]]
+  then
+    all=""
   else
-    all='-S --build'
+    all='-P -S --build'
   fi
 
   if [[ "${all}" == "" ]]
@@ -69,4 +72,4 @@ _cmake() {
   fi
 }
 
-complete -F _cmake cmake.exe cmake
+complete -o bashdefault -o default -F _cmake cmake.exe cmake
