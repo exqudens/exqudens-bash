@@ -17,9 +17,6 @@ _cmake() {
   elif echo "${line}" | awk '!/--build --preset .+ /{exit 1}'
   then
     all='--target'
-  elif echo "${line}" | awk '!/--build --preset .+ /{exit 1}'
-  then
-    all='--target'
   elif [[ "${line}" == *"--build --preset"* ]]
   then
     if [[ -f "./CMakePresets.json" ]]
@@ -31,10 +28,10 @@ _cmake() {
   elif [[ "${line}" == *"--build"* ]]
   then
     all='--preset'
-  elif echo "${line}" | awk '!/-S . --preset .+ /{exit 1}'
+  elif echo "${line}" | awk '!/--preset .+ /{exit 1}'
   then
     all=''
-  elif [[ "${line}" == *"-S . --preset"* ]]
+  elif [[ "${line}" == *"--preset"* ]]
   then
     if [[ -f "./CMakePresets.json" ]]
     then
@@ -42,7 +39,7 @@ _cmake() {
     else
       all=''
     fi
-  elif [[ "${line}" == *"-S . --list-presets"* ]]
+  elif [[ "${line}" == *"--list-presets"* ]]
   then
     all=''
   elif [[ "${line}" == *"-S ."* ]]
@@ -55,7 +52,7 @@ _cmake() {
   then
     all=""
   else
-    all='-P -S --build'
+    all='-P -S --build --list-presets --preset'
   fi
 
   if [[ "${all}" == "" ]]
